@@ -25,37 +25,30 @@ var firebaseConfig = {
          //console.log("userEmail is:" + userEmail);
          sessionStorage.setItem('userEmail', userEmail);
       });
-      var path = window.location.href;
-      var page = path.split("/").pop();
-      if(page=="form.html")
-      {
-           // console.log("checking");
-            document.getElementById('email').disabled=false;   //After data not fetching properly and two times storing
-            document.getElementById('age').disabled=false;
-            document.getElementById('gender').disabled=false;
-            document.getElementById('next').disabled=false;
-            document.getElementById('country').disabled=false;
-          checkExist();
-      }
+      checkAuthState();
+    //   var path = window.location.href;
+    //   var page = path.split("/").pop();
+    //   if(page=="form.html")
+    //   {
+    //        console.log("checking");
+    //         document.getElementById('email').disabled=false;   //After data not fetching properly and two times storing
+    //         document.getElementById('age').disabled=false;
+    //         document.getElementById('gender').disabled=false;
+    //         document.getElementById('next').disabled=false;
+    //         document.getElementById('country').disabled=false;
+    //       checkExist();
+    //   }
       
   }
   
   function showField(){
       firebase.auth().onAuthStateChanged(user=>{
           if(user){
-             checkExist()
+             checkExist();
           }
           else
           {
-              document.getElementById('FillForm').style.display = 'block';
-              setTimeout(function(){
-                  document.getElementById('FillForm').style.display = 'none';
-              },10000);
-              document.getElementById('email').disabled=true;
-              document.getElementById('age').disabled=true;
-              document.getElementById('gender').disabled=true;
-              document.getElementById('next').disabled=true;
-              document.getElementById('country').disabled=true;
+              onLogin();
               
           }
       });
@@ -63,16 +56,47 @@ var firebaseConfig = {
   
   function checkAuthState()
   {
+    var path = window.location.href;
+    var page = path.split("/").pop();
       firebase.auth().onAuthStateChanged(user=>{
           if(user){
-              document.getElementById('login').innerHTML="logged in";
-              document.getElementById('login').style.display="none";
-              document.getElementById('logout').style.display="block";
-             // console.log("user is already logged in");
-              
+                
+              if(page=="form.html")
+              {
+                document.getElementById('successfullySignedIn').innerHTML="Successfully Signed In As " + user.email;
+                document.getElementById('successfullySignedIn').style.display = 'block';
+                setTimeout(function(){
+                    
+                    document.getElementById('successfullySignedIn').style.display = 'none';
+                },6000);
+                document.getElementById('email').disabled=false;
+                document.getElementById('age').disabled=false;
+                document.getElementById('gender').disabled=false;
+                document.getElementById('next').disabled=false;
+                document.getElementById('country').disabled=false;
+                document.getElementById('login').style.display="none";
+                document.getElementById('logout').style.display="block";
+                document.getElementById('FillForm').style.display = 'none';
+              }  
+             // console.log("user is already logged in");   
           }
           else
           {
+            
+              if(page=="form.html")
+              {
+                document.getElementById('FillForm').style.display = 'block';
+                document.getElementById('email').disabled=true;
+                document.getElementById('age').disabled=true;
+                document.getElementById('gender').disabled=true;
+                document.getElementById('next').disabled=true;
+                document.getElementById('country').disabled=true;
+                document.getElementById('maleTrigger').style.display="none";
+                document.getElementById('femaleTrigger').style.display="none";
+                document.getElementById('successfullySignedIn').style.display = 'none';
+                document.getElementById('AlreadySubmitted').style.display = 'none';
+              }
+              
             //  console.log("no one is logged in");
               document.getElementById('login').style.display="block";
               document.getElementById('logout').style.display="none";
@@ -85,21 +109,11 @@ var firebaseConfig = {
      // console.log("logged out");
       firebase.auth().signOut();
       
-      var path = window.location.href;
-      var page = path.split("/").pop();
-      if(page=="form.html")
-      {
-        document.getElementById('email').disabled=true;
-        document.getElementById('age').disabled=true;
-        document.getElementById('gender').disabled=true;
-        document.getElementById('next').disabled=true;
-        document.getElementById('country').disabled=true;
-       // document.getElementById('login').innerHTML="login with google";
-        document.getElementById('maleTrigger').style.display="none";
-        document.getElementById('femaleTrigger').style.display="none";
-          location.reload();
-      }
       checkAuthState();
+      document.getElementById('successfullySignedOut').style.display = 'block';
+      setTimeout(function(){
+        document.getElementById('successfullySignedOut').style.display = 'none';
+    },3000);
   }
   
   
@@ -176,7 +190,7 @@ var firebaseConfig = {
               }
               
           }
-          else
+          if(childData.gender=="female")
           {
               ele = document.getElementsByName('femaleFaceType');  
              
@@ -256,7 +270,6 @@ var firebaseConfig = {
       }
       
   }
-  
   
   function submitData(){
       var email, gender, country, age; 
@@ -376,5 +389,3 @@ var firebaseConfig = {
           facetone: facetone
       });
   }
-  
-  
