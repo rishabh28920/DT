@@ -34,9 +34,9 @@ ul{
 .loginbtn, .logoutbtn{
   margin-left: 25%;
   margin-right: auto;
-  border-radius: 20px;
-  background-color: #dddde4;
-  box-shadow: 0px 2px 4px 4px rgb(54, 54, 45);
+  border-radius: 10px;
+  background-color: rgb(199, 32, 32);
+ 
 }
 .logoimg{
   margin-top: 0;
@@ -119,12 +119,7 @@ ul{
 }
 
 
-/* FORM STYLES */
-/* .contact form .form1{
-  /* display:flexbox; */
-  /* grid-template-columns: 1fr 1fr; */
-  /* grid-gap:10px; */
-/* }  */
+
 
 .contact form label{
   display:block;
@@ -157,11 +152,7 @@ ul{
   margin-left: 30%;
   text-transform: uppercase;
 }
-/* .btn{
-  background:#088cc9;
-  border:0;
- width: 60%;
-} */
+
 
 .contact form button:hover,.contact form button:focus{
   background:#92bde7;
@@ -205,4 +196,4 @@ ul{
    min-height: 100px;
    max-height: 300px;
   }
-  /* img{height:100%; max-height: 600px; min-height: 100px;} */
+  
