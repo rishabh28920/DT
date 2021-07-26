@@ -2,7 +2,7 @@ const initBg = (autoplay = true) => {
     const bgImgsNames = ['boy-1.jpg','girl4.jpg', 'boy3-2.jpg'];
     const bgImgs = bgImgsNames.map(img => "img/" + img);
 
-    $.backstretch(bgImgs, {duration: 2500, fade: 900});
+    $('.tm-container').backstretch(bgImgs, {duration: 2500, fade: 900});
 
     if(!autoplay) {
       $.backstretch('pause');  

@@ -2,8 +2,8 @@
   box-sizing: border-box;
 }
 
-body{
-  background-image: url(/img/formbck6.jpg);
+.tm-container{
+  /* background-image: url(/img/formbck6.jpg); */
   background-repeat: repeat;
   background-position:center;
   color:#1b1b1d;
@@ -12,6 +12,7 @@ body{
   font-family: sans-serif;
   padding:1em;
 }
+
 
 .container{
   max-width:1400px;
@@ -195,5 +196,10 @@ ul{
   .bodytype{
    min-height: 100px;
    max-height: 300px;
+  }
+
+  .form-control{
+    border-radius:10px;
+    color:gray;
   }
   
